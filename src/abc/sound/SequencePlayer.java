@@ -12,6 +12,7 @@ import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Sequence;
 import javax.sound.midi.Sequencer;
 import javax.sound.midi.ShortMessage;
+import javax.sound.midi.Synthesizer;
 import javax.sound.midi.Track;
 
 /**
@@ -110,6 +111,7 @@ public class SequencePlayer {
         sequencer.open();
         sequencer.setTempoInBPM(this.beatsPerMinute);
 
+        /*
         sequencer.addMetaEventListener(new MetaEventListener() {
             public void meta(MetaMessage meta) {
                 if (meta.getType() == META_END_OF_TRACK) {
@@ -118,12 +120,25 @@ public class SequencePlayer {
                     // stop & close the sequencer
                     sequencer.stop();
                     sequencer.close();
+                    System.out.println("end"); // debug
                 }
             }
         });
+        */
+
+        // make it play sound out loud
+        Synthesizer synth = MidiSystem.getSynthesizer();
+        sequencer.getTransmitter().setReceiver(synth.getReceiver());
+        synth.open();
 
         // start playing!
         sequencer.start();
+
+        // set number to 1000 x num seconds to play the song
+        try { Thread.sleep(10000); } catch (InterruptedException ie) { }
+
+        sequencer.stop();
+        sequencer.close();
     }
 
     /**
