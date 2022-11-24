@@ -62,6 +62,8 @@ public class SequencePlayerTest {
             player.addNote(c, 168, 24);
 
             System.out.println(player);
+
+            player.play();
         } catch (MidiUnavailableException e) {
             throw new RuntimeException(e);
         } catch (InvalidMidiDataException e) {
@@ -73,6 +75,72 @@ public class SequencePlayerTest {
     public void testPieceTwo(){
         try {
             SequencePlayer player = new SequencePlayer(200, 12);
+            int a = new Pitch('A').toMidiNote();
+            int c = new Pitch('C').toMidiNote();
+            int d = new Pitch('D').toMidiNote();
+            int e = new Pitch('E').toMidiNote();
+            int f = new Pitch('F').toMidiNote();
+            int g = new Pitch('G').toMidiNote();
+            int b = new Pitch('B').toMidiNote();
+
+            // measure 1
+            player.addNote(f, 0, 6);
+            player.addNote(e, 6, 6);
+            player.addNote(f, 12, 6);
+            player.addNote(e, 18, 6);
+
+            //z
+            player.addNote(f, 24, 6);
+            player.addNote(e, 30, 6);
+
+            //z
+            player.addNote(c, 36, 6);
+            player.addNote(f, 42, 6);
+
+            player.addNote(f, 48, 6);
+            player.addNote(e, 54, 6);
+
+            // measure 2
+            player.addNote(g, 60, 6);
+            player.addNote(b, 66, 6);
+            player.addNote(g, 72, 6);
+
+            //z
+            player.addNote(g, 78, 6);
+
+            //z
+            // measure 3
+            player.addNote(c, 84, 6);
+            player.addNote(g, 90, 6);
+
+            //rest
+            player.addNote(e, 96, 6);
+
+            //measure 4
+            player.addNote(e, 102, 6);
+            player.addNote(a, 108, 6);
+            player.addNote(b, 114, 6);
+            player.addNote(b, 120, 6);
+            player.addNote(a, 126, 6);
+
+            //measure 5
+            player.addNote(g, 132, 6);
+            player.addNote(e, 138, 6);
+            player.addNote(g, 144, 6);
+            player.addNote(a, 150, 6);
+            player.addNote(f, 156, 6);
+            player.addNote(g, 162, 6);
+
+            //z
+            //measure 6
+            player.addNote(e, 168, 6);
+            player.addNote(c, 174, 6);
+            player.addNote(d, 180, 6);
+            player.addNote(b, 186, 6);
+
+            //rest
+            System.out.println(player);
+            player.play();
 
         } catch (MidiUnavailableException e) {
             throw new RuntimeException(e);
