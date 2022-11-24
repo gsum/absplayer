@@ -75,68 +75,75 @@ public class SequencePlayerTest {
     public void testPieceTwo(){
         try {
             SequencePlayer player = new SequencePlayer(200, 12);
+            // first octave notes
             int a = new Pitch('A').toMidiNote();
-            int c = new Pitch('C').toMidiNote();
-            int d = new Pitch('D').toMidiNote();
-            int e = new Pitch('E').toMidiNote();
-            int f = new Pitch('F').toMidiNote();
-            int g = new Pitch('G').toMidiNote();
             int b = new Pitch('B').toMidiNote();
+            int bFlat = new Pitch('B').transpose(-1).toMidiNote();
+            int e = new Pitch('E').toMidiNote();
+            int fSharp = new Pitch('F').transpose(1).toMidiNote();
+            int g = new Pitch('G').toMidiNote();
+            // second octave notes
+            int highC = new Pitch('C').transpose(12).toMidiNote();
+            int highD = new Pitch('D').transpose(12).toMidiNote();
+            int highE = new Pitch('E').transpose(12).toMidiNote();
+            int highF = new Pitch('F').transpose(12).toMidiNote();
+            int highG = new Pitch('G').transpose(12).toMidiNote();
+            int highA = new Pitch('A').transpose(12).toMidiNote();
 
             // measure 1
-            player.addNote(f, 0, 6);
-            player.addNote(e, 6, 6);
-            player.addNote(f, 12, 6);
-            player.addNote(e, 18, 6);
+            player.addNote(fSharp, 0, 6);
+            player.addNote(highE, 0, 6);
+            player.addNote(fSharp, 6, 6);
+            player.addNote(highE, 6, 6);
 
-            //z
-            player.addNote(f, 24, 6);
-            player.addNote(e, 30, 6);
+            //z 12-18
+            player.addNote(fSharp, 18, 6);
+            player.addNote(highE, 18, 6);
 
-            //z
-            player.addNote(c, 36, 6);
-            player.addNote(f, 42, 6);
+            //z 24-30
+            player.addNote(fSharp, 30, 6);
+            player.addNote(highC, 30, 6);
 
-            player.addNote(f, 48, 6);
-            player.addNote(e, 54, 6);
+            player.addNote(fSharp, 36, 12);
+            player.addNote(highE, 36, 12);
 
             // measure 2
-            player.addNote(g, 60, 6);
-            player.addNote(b, 66, 6);
-            player.addNote(g, 72, 6);
+            player.addNote(highG, 48, 12);
+            player.addNote(b, 48, 12);
+            player.addNote(g, 48, 12);
 
-            //z
-            player.addNote(g, 78, 6);
+            //z 60-72
+            player.addNote(g, 72, 12);
 
-            //z
+            //z 84-96
             // measure 3
-            player.addNote(c, 84, 6);
-            player.addNote(g, 90, 6);
+            player.addNote(highC, 96, 18);
+            player.addNote(g, 114, 6);
 
-            //rest
-            player.addNote(e, 96, 6);
+            //rest 120-132
+            player.addNote(e, 132, 12);
 
             //measure 4
-            player.addNote(e, 102, 6);
-            player.addNote(a, 108, 6);
-            player.addNote(b, 114, 6);
-            player.addNote(b, 120, 6);
-            player.addNote(a, 126, 6);
+            player.addNote(e, 144, 6);
+            player.addNote(a, 150, 12);
+            player.addNote(b, 162, 12);
+            player.addNote(bFlat, 174, 6);
+            player.addNote(a, 180, 12);
 
             //measure 5
-            player.addNote(g, 132, 6);
-            player.addNote(e, 138, 6);
-            player.addNote(g, 144, 6);
-            player.addNote(a, 150, 6);
-            player.addNote(f, 156, 6);
-            player.addNote(g, 162, 6);
+            player.addNote(g, 192, 8);
+            player.addNote(highE, 200, 8);
+            player.addNote(highG, 208, 8);
+            player.addNote(highA, 216, 12);
+            player.addNote(highF, 228, 6);
+            player.addNote(highG, 234, 6);
 
-            //z
             //measure 6
-            player.addNote(e, 168, 6);
-            player.addNote(c, 174, 6);
-            player.addNote(d, 180, 6);
-            player.addNote(b, 186, 6);
+            //z 240-246
+            player.addNote(highE, 246, 12);
+            player.addNote(highC, 258, 6);
+            player.addNote(highD, 264, 6);
+            player.addNote(b, 270, 9);
 
             //rest
             System.out.println(player);
