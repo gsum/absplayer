@@ -2,17 +2,7 @@ package abc.sound;
 
 import java.text.MessageFormat;
 
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MetaEventListener;
-import javax.sound.midi.MetaMessage;
-import javax.sound.midi.MidiEvent;
-import javax.sound.midi.MidiMessage;
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.MidiUnavailableException;
-import javax.sound.midi.Sequence;
-import javax.sound.midi.Sequencer;
-import javax.sound.midi.ShortMessage;
-import javax.sound.midi.Track;
+import javax.sound.midi.*;
 
 /**
  * Schedules and plays a sequence of notes at given time steps (or "ticks").
@@ -45,7 +35,7 @@ public class SequencePlayer {
 
     /**
      * Make a new MIDI sequence player.
-     * 
+     *
      * @param beatsPerMinute the number of beats per minute
      * @param ticksPerBeat the number of ticks per beat; every note plays for an integer number of ticks
      * @throws MidiUnavailableException
@@ -83,14 +73,14 @@ public class SequencePlayer {
             addMidiNoteEvent(ShortMessage.NOTE_OFF, note, startTick + numTicks);
         } catch (InvalidMidiDataException imde) {
             String msg = MessageFormat.format("Cannot add note with the pitch {0} at tick {1} " +
-                                              "for duration {2}", note, startTick, numTicks);
+                    "for duration {2}", note, startTick, numTicks);
             throw new RuntimeException(msg, imde);
         }
     }
 
     /**
      * Schedule a MIDI note event.
-     * 
+     *
      * @param eventType valid MidiMessage type in ShortMessage
      * @param note valid pitch value
      * @param tick tick >= 0
@@ -103,13 +93,14 @@ public class SequencePlayer {
 
     /**
      * Open the MIDI sequencer and play the scheduled music.
-     * 
+     *
      * @throws MidiUnavailableException if the sequencer cannot be opened
      */
     public void play() throws MidiUnavailableException {
         sequencer.open();
         sequencer.setTempoInBPM(this.beatsPerMinute);
 
+        /*
         sequencer.addMetaEventListener(new MetaEventListener() {
             public void meta(MetaMessage meta) {
                 if (meta.getType() == META_END_OF_TRACK) {
@@ -118,12 +109,25 @@ public class SequencePlayer {
                     // stop & close the sequencer
                     sequencer.stop();
                     sequencer.close();
+                    System.out.println("end"); // debug
                 }
             }
         });
+        */
+        // written by Cameron Kolodjski
+        // make it play sound out loud
+        Synthesizer synth = MidiSystem.getSynthesizer();
+        sequencer.getTransmitter().setReceiver(synth.getReceiver());
+        synth.open();
 
         // start playing!
         sequencer.start();
+
+        // set number to 1000 x num seconds to play the song
+        try { Thread.sleep(10000); } catch (InterruptedException ie) { }
+
+        sequencer.stop();
+        sequencer.close();
     }
 
     /**
@@ -176,6 +180,50 @@ public class SequencePlayer {
         }
 
         return trackInfo;
+    }
+
+    public int[] getNotes() {
+        int[] notes = new int[track.size()];
+        for (int i = 0; i < track.size(); i++) {
+            final MidiEvent e = track.get(i);
+            final MidiMessage msg = e.getMessage();
+            final String msgString;
+
+            if (msg instanceof ShortMessage) {
+                final ShortMessage smg = (ShortMessage) msg;
+                final int command = smg.getCommand();
+                final String commandName;
+
+                if (command == ShortMessage.NOTE_OFF) {
+                    commandName = "NOTE_OFF";
+                } else if (command == ShortMessage.NOTE_ON) {
+                    commandName = "NOTE_ON ";
+                } else {
+                    commandName = "Unknown command " + command;
+                }
+
+                msgString = "Event: " + commandName + " Pitch: " + smg.getData1() + " ";
+
+            } else if (msg instanceof MetaMessage) {
+                final MetaMessage mmg = (MetaMessage) msg;
+                final int type = mmg.getType();
+                final String typeName;
+
+                if (type == META_END_OF_TRACK) {
+                    typeName = "END_OF_TRACK";
+                } else {
+                    typeName = "Unknown type " + type;
+                }
+
+                msgString = "Meta event: " + typeName;
+
+            } else {
+                msgString = "Unknown event";
+            }
+
+            notes[i] = Integer.parseInt(msgString.substring(14, 16));
+        }
+        return notes;
     }
 
     /**
