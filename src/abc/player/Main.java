@@ -15,6 +15,7 @@ import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
 
 import abc.sound.*;
+
 /**
  * Main entry point of your application.
  */
@@ -30,38 +31,36 @@ public class Main {
      * @param file the name of input abc file
      */
     public static void play(String file) {
-        // YOUR CODE HERE
-    	 File abcFile = new File(file);
-         Header header = Music.parseHeader(abcFile);
-         
-         Music music = Music.parseMusic(header);
-         try {
-             int beatsPerMinute = header.getTempoBPM(); 
-             int ticksPerBeat = 192;
-             int atBeat = 12;                                                        
-             SequencePlayer player = new SequencePlayer(beatsPerMinute, ticksPerBeat); 
-             music.play(player, atBeat);
-             player.play();
-         } catch (MidiUnavailableException mue) {
-             mue.printStackTrace();
-         } catch (InvalidMidiDataException imde) {
-             imde.printStackTrace();
-         }
+        File abcFile = new File(file);
+        Header header = Music.parseHeader(abcFile);
+        
+        Music music = Music.parseMusic(header);
+        try {
+            int beatsPerMinute = header.getTempoBPM(); 
+            int ticksPerBeat = 192;
+            int atBeat = 12;                                                        
+            SequencePlayer player = new SequencePlayer(beatsPerMinute, ticksPerBeat); 
+            music.play(player, atBeat);
+            player.play();
+        } catch (MidiUnavailableException mue) {
+            mue.printStackTrace();
+        } catch (InvalidMidiDataException imde) {
+            imde.printStackTrace();
+        }
     }
 
-    public static void main(String[] args) {
-        // CALL play() HERE USING ARGS
-    	 Queue<String> arguments = new LinkedList<String>(Arrays.asList(args));
-         arguments.add("sample_abc/piece1.abc");
-         //arguments.add("sample_abc/piece2.abc");
-         
-         if (arguments.size() == 0) {
-             throw new RuntimeException("No abc file specified!");
-         } else {
-             for (int i = 0; i < arguments.size(); i++) {
-                 String fileName = arguments.poll();
-                 play(fileName);
-             }     
-         }
+    public static void main(String[] args) { 
+        Queue<String> arguments = new LinkedList<String>(Arrays.asList(args));
+        arguments.add("sample_abc/piece1.abc");
+//        arguments.add("sample_abc/abc_song.abc");
+        
+        if (arguments.size() == 0) {
+            throw new RuntimeException("No abc file specified!");
+        } else {
+            for (int i = 0; i < arguments.size(); i++) {
+                String fileName = arguments.poll();
+                play(fileName);
+            }     
+        }
     }
 }
