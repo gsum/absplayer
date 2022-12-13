@@ -9,6 +9,11 @@ import static org.junit.Assert.*;
 
 public class HeaderTest {
 
+    /*
+        * Test strategy:
+        * Test the various inputs of the header to ensure accuracy when being used in the music player
+     */
+
     //Test tostring method for one voice
     @Test
     public void testToStringOneVoice() {
