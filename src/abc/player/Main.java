@@ -49,7 +49,8 @@ public class Main {
         }
     }
 
-    public static void main(String[] args) { 
+    public static void main(String[] args) {
+        // Could potentially allow a way for user to select a file to play
         Queue<String> arguments = new LinkedList<String>(Arrays.asList(args));
 //        arguments.add("sample_abc/piece1.abc");
 //        arguments.add("sample_abc/piece2.abc");
