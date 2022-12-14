@@ -8,8 +8,6 @@ import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
 
 public class SequencePlayerTest {
-
-    // TODO: warmup #2
     
     @Test
     public void test() {
@@ -61,9 +59,64 @@ public class SequencePlayerTest {
             player.addNote(d, 165, 3);
             player.addNote(c, 168, 24);
 
-            System.out.println(player);
+            String expected = "Event: NOTE_ON  Pitch: 60  Tick: 0\n" +
+            "Event: NOTE_OFF Pitch: 60  Tick: 12\n" +
+            "Event: NOTE_ON  Pitch: 60  Tick: 12\n" +
+            "Event: NOTE_OFF Pitch: 60  Tick: 24\n" +
+            "Event: NOTE_ON  Pitch: 60  Tick: 24\n" +
+            "Event: NOTE_OFF Pitch: 60  Tick: 33\n" +
+            "Event: NOTE_ON  Pitch: 62  Tick: 33\n" +
+            "Event: NOTE_OFF Pitch: 62  Tick: 36\n" +
+            "Event: NOTE_ON  Pitch: 64  Tick: 36\n" +
+            "Event: NOTE_OFF Pitch: 64  Tick: 48\n" +
+            "Event: NOTE_ON  Pitch: 64  Tick: 48\n" +
+            "Event: NOTE_OFF Pitch: 64  Tick: 57\n" +
+            "Event: NOTE_ON  Pitch: 62  Tick: 57\n" +
+            "Event: NOTE_OFF Pitch: 62  Tick: 60\n" +
+            "Event: NOTE_ON  Pitch: 64  Tick: 60\n" +
+            "Event: NOTE_OFF Pitch: 64  Tick: 69\n" +
+            "Event: NOTE_ON  Pitch: 65  Tick: 69\n" +
+            "Event: NOTE_OFF Pitch: 65  Tick: 72\n" +
+            "Event: NOTE_ON  Pitch: 67  Tick: 72\n" +
+            "Event: NOTE_OFF Pitch: 67  Tick: 96\n" +
+            "Event: NOTE_ON  Pitch: 72  Tick: 96\n" +
+            "Event: NOTE_OFF Pitch: 72  Tick: 100\n" +
+            "Event: NOTE_ON  Pitch: 72  Tick: 100\n" +
+            "Event: NOTE_OFF Pitch: 72  Tick: 104\n" +
+            "Event: NOTE_ON  Pitch: 72  Tick: 104\n" +
+            "Event: NOTE_OFF Pitch: 72  Tick: 108\n" +
+            "Event: NOTE_ON  Pitch: 67  Tick: 108\n" +
+            "Event: NOTE_OFF Pitch: 67  Tick: 112\n" +
+            "Event: NOTE_ON  Pitch: 67  Tick: 112\n" +
+            "Event: NOTE_OFF Pitch: 67  Tick: 116\n" +
+            "Event: NOTE_ON  Pitch: 67  Tick: 116\n" +
+            "Event: NOTE_OFF Pitch: 67  Tick: 120\n" +
+            "Event: NOTE_ON  Pitch: 64  Tick: 120\n" +
+            "Event: NOTE_OFF Pitch: 64  Tick: 124\n" +
+            "Event: NOTE_ON  Pitch: 64  Tick: 124\n" +
+            "Event: NOTE_OFF Pitch: 64  Tick: 128\n" +
+            "Event: NOTE_ON  Pitch: 64  Tick: 128\n" +
+            "Event: NOTE_OFF Pitch: 64  Tick: 132\n" +
+            "Event: NOTE_ON  Pitch: 60  Tick: 132\n" +
+            "Event: NOTE_OFF Pitch: 60  Tick: 136\n" +
+            "Event: NOTE_ON  Pitch: 60  Tick: 136\n" +
+            "Event: NOTE_OFF Pitch: 60  Tick: 140\n" +
+            "Event: NOTE_ON  Pitch: 60  Tick: 140\n" +
+            "Event: NOTE_OFF Pitch: 60  Tick: 144\n" +
+            "Event: NOTE_ON  Pitch: 67  Tick: 144\n" +
+            "Event: NOTE_OFF Pitch: 67  Tick: 153\n" +
+            "Event: NOTE_ON  Pitch: 65  Tick: 153\n" +
+            "Event: NOTE_OFF Pitch: 65  Tick: 156\n" +
+            "Event: NOTE_ON  Pitch: 64  Tick: 156\n" +
+            "Event: NOTE_OFF Pitch: 64  Tick: 165\n" +
+            "Event: NOTE_ON  Pitch: 62  Tick: 165\n" +
+            "Event: NOTE_OFF Pitch: 62  Tick: 168\n" +
+            "Event: NOTE_ON  Pitch: 60  Tick: 168\n" +
+            "Event: NOTE_OFF Pitch: 60  Tick: 192\n" +
+            "Meta event: END_OF_TRACK Tick: 192\n";
+            
+            assertEquals("Player did not build the sequence correctly.", expected, player.toString());
 
-            player.play();
         } catch (MidiUnavailableException e) {
             throw new RuntimeException(e);
         } catch (InvalidMidiDataException e) {
@@ -144,10 +197,75 @@ public class SequencePlayerTest {
             player.addNote(highC, 258, 6);
             player.addNote(highD, 264, 6);
             player.addNote(b, 270, 9);
-
             //rest
-            System.out.println(player);
-            player.play();
+            
+            String expected = "Event: NOTE_ON  Pitch: 66  Tick: 0\n" +
+            "Event: NOTE_ON  Pitch: 76  Tick: 0\n" +
+            "Event: NOTE_OFF Pitch: 66  Tick: 6\n" +
+            "Event: NOTE_OFF Pitch: 76  Tick: 6\n" +
+            "Event: NOTE_ON  Pitch: 66  Tick: 6\n" +
+            "Event: NOTE_ON  Pitch: 76  Tick: 6\n" +
+            "Event: NOTE_OFF Pitch: 66  Tick: 12\n" +
+            "Event: NOTE_OFF Pitch: 76  Tick: 12\n" +
+            "Event: NOTE_ON  Pitch: 66  Tick: 18\n" +
+            "Event: NOTE_ON  Pitch: 76  Tick: 18\n" +
+            "Event: NOTE_OFF Pitch: 66  Tick: 24\n" +
+            "Event: NOTE_OFF Pitch: 76  Tick: 24\n" +
+            "Event: NOTE_ON  Pitch: 66  Tick: 30\n" +
+            "Event: NOTE_ON  Pitch: 72  Tick: 30\n" +
+            "Event: NOTE_OFF Pitch: 66  Tick: 36\n" +
+            "Event: NOTE_OFF Pitch: 72  Tick: 36\n" +
+            "Event: NOTE_ON  Pitch: 66  Tick: 36\n" +
+            "Event: NOTE_ON  Pitch: 76  Tick: 36\n" +
+            "Event: NOTE_OFF Pitch: 66  Tick: 48\n" +
+            "Event: NOTE_OFF Pitch: 76  Tick: 48\n" +
+            "Event: NOTE_ON  Pitch: 79  Tick: 48\n" +
+            "Event: NOTE_ON  Pitch: 71  Tick: 48\n" +
+            "Event: NOTE_ON  Pitch: 67  Tick: 48\n" +
+            "Event: NOTE_OFF Pitch: 79  Tick: 60\n" +
+            "Event: NOTE_OFF Pitch: 71  Tick: 60\n" +
+            "Event: NOTE_OFF Pitch: 67  Tick: 60\n" +
+            "Event: NOTE_ON  Pitch: 67  Tick: 72\n" +
+            "Event: NOTE_OFF Pitch: 67  Tick: 84\n" +
+            "Event: NOTE_ON  Pitch: 72  Tick: 96\n" +
+            "Event: NOTE_OFF Pitch: 72  Tick: 114\n" +
+            "Event: NOTE_ON  Pitch: 67  Tick: 114\n" +
+            "Event: NOTE_OFF Pitch: 67  Tick: 120\n" +
+            "Event: NOTE_ON  Pitch: 64  Tick: 132\n" +
+            "Event: NOTE_OFF Pitch: 64  Tick: 144\n" +
+            "Event: NOTE_ON  Pitch: 64  Tick: 144\n" +
+            "Event: NOTE_OFF Pitch: 64  Tick: 150\n" +
+            "Event: NOTE_ON  Pitch: 69  Tick: 150\n" +
+            "Event: NOTE_OFF Pitch: 69  Tick: 162\n" +
+            "Event: NOTE_ON  Pitch: 71  Tick: 162\n" +
+            "Event: NOTE_OFF Pitch: 71  Tick: 174\n" +
+            "Event: NOTE_ON  Pitch: 70  Tick: 174\n" +
+            "Event: NOTE_OFF Pitch: 70  Tick: 180\n" +
+            "Event: NOTE_ON  Pitch: 69  Tick: 180\n" +
+            "Event: NOTE_OFF Pitch: 69  Tick: 192\n" +
+            "Event: NOTE_ON  Pitch: 67  Tick: 192\n" +
+            "Event: NOTE_OFF Pitch: 67  Tick: 200\n" +
+            "Event: NOTE_ON  Pitch: 76  Tick: 200\n" +
+            "Event: NOTE_OFF Pitch: 76  Tick: 208\n" +
+            "Event: NOTE_ON  Pitch: 79  Tick: 208\n" +
+            "Event: NOTE_OFF Pitch: 79  Tick: 216\n" +
+            "Event: NOTE_ON  Pitch: 81  Tick: 216\n" +
+            "Event: NOTE_OFF Pitch: 81  Tick: 228\n" +
+            "Event: NOTE_ON  Pitch: 77  Tick: 228\n" +
+            "Event: NOTE_OFF Pitch: 77  Tick: 234\n" +
+            "Event: NOTE_ON  Pitch: 79  Tick: 234\n" +
+            "Event: NOTE_OFF Pitch: 79  Tick: 240\n" +
+            "Event: NOTE_ON  Pitch: 76  Tick: 246\n" +
+            "Event: NOTE_OFF Pitch: 76  Tick: 258\n" +
+            "Event: NOTE_ON  Pitch: 72  Tick: 258\n" +
+            "Event: NOTE_OFF Pitch: 72  Tick: 264\n" +
+            "Event: NOTE_ON  Pitch: 74  Tick: 264\n" +
+            "Event: NOTE_OFF Pitch: 74  Tick: 270\n" +
+            "Event: NOTE_ON  Pitch: 71  Tick: 270\n" +
+            "Event: NOTE_OFF Pitch: 71  Tick: 279\n" +
+            "Meta event: END_OF_TRACK Tick: 279\n";            
+
+            assertEquals("Player did not build the sequence correctly.", expected, player.toString());
 
         } catch (MidiUnavailableException e) {
             throw new RuntimeException(e);
