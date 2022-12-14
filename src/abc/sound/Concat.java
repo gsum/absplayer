@@ -2,7 +2,6 @@ package abc.sound;
 
 /**
  * Immutable representation of a concatenation of two pieces of music
- * @author alican, mabunass, narek
  *
  */
 public class Concat implements Music {

@@ -14,7 +14,6 @@ import lib6005.parser.UnableToParseException;
 
 /**
  * Immutable datatype representing a piece of music specified in a given abc file 
- * @author alican, mabunass, narek
  */
 public interface Music {
     // Music = Rest(duration: double) + Note(duration: double, pitch: Pitch) + MultipleVoices(voice: Music, rest: Music) + Concat(m1: Music, m2: Music)

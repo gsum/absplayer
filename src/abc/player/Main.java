@@ -51,8 +51,13 @@ public class Main {
 
     public static void main(String[] args) { 
         Queue<String> arguments = new LinkedList<String>(Arrays.asList(args));
-        arguments.add("sample_abc/piece1.abc");
-//        arguments.add("sample_abc/abc_song.abc");
+//        arguments.add("sample_abc/piece1.abc");
+//        arguments.add("sample_abc/piece2.abc");
+//	    arguments.add("sample_abc/abc_song.abc");
+//    	arguments.add("sample_abc/fur_elise.abc");
+    	arguments.add("sample_abc/invention.abc");
+//    	arguments.add("sample_abc/little_night_music.abc");
+//    	arguments.add("sample_abc/paddy.abc");
         
         if (arguments.size() == 0) {
             throw new RuntimeException("No abc file specified!");
